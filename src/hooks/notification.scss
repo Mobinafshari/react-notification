@@ -1,0 +1,11 @@
+.notification{
+    width: 200px;
+    height: auto;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 5%;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: green;
+}

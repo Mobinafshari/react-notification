@@ -1,8 +1,5 @@
-
 function Notification() {
-  return (
-    <div>Notification</div>
-  )
+  return <section className="notification">hello</section>;
 }
 
-export default Notification
+export default Notification;
