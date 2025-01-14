@@ -1,4 +1,4 @@
-import "./styles/notification.scss";
+import "./notification.scss";
 import { colord } from "colord";
 
 type Props = {
@@ -7,23 +7,24 @@ type Props = {
 };
 
 const colors = {
-  warn: "yellow",
-  success: "green",
-  error: "red",
+  warn: "#FEEC37",
+  success: "#C2FFC7",
+  error: "#FF748B",
   info: "white",
 };
-const useNotification: React.FC<Props> = ({ type = "success", text }) => {
+const Notification: React.FC<Props> = ({ type = "success", text }) => {
   const notificationColor = colors[type];
+  console.log(colord(notificationColor).darken(0.1).toHex());
   return (
     <section
       className="notification"
       style={{
         backgroundColor: notificationColor,
-        borderColor: colord(notificationColor).darken(0.5).toHex(),
+        borderColor: colord(notificationColor).darken(0.3).toHex(),
       }}>
       {text}
     </section>
   );
 };
 
-export default useNotification;
+export default Notification;

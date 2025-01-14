@@ -1,9 +1,9 @@
-import useNotification from "./hooks/useNotification"
+import Notification from "./hooks/Notification"
 
 function App() {
   
   return (
-    <div> hello </div>
+    <div><Notification text="hello"  type="warn"/> </div>
   )
 }
 

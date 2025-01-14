@@ -1,11 +1,24 @@
-.notification{
-    width: 200px;
-    height: auto;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 5%;
-    padding: 10px;
-    border-radius: 8px;
-    border : 1px solid
+.notification {
+  width: 200px;
+  height: auto;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0); 
+  top: 30px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid;
+  font-family: cursive;
+  animation: JumpIn 1000ms ease-in;
+  
+  animation-delay: 500ms;
+}
+
+@keyframes JumpIn {
+  from {
+    transform: translate(-50%, -200%); /* Start with translateX and translateY */
+  }
+  to {
+    transform: translate(-50%, 0); /* End with translateX and translateY */
+  }
 }
