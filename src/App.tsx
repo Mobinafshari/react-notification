@@ -1,8 +1,9 @@
-import Notification from "./components/Notification"
+import useNotification from "./hooks/useNotification"
 
 function App() {
+  
   return (
-    <div><Notification /></div>
+    <div> hello </div>
   )
 }
 
