@@ -23,16 +23,20 @@
 @keyframes JumpIn {
   from {
     transform: translate(-50%, -200%);
+    opacity: 0;
   }
   to {
     transform: translate(-50%, 0);
+    opacity: 1;
   }
 }
 @keyframes JumpOut {
   from {
     transform: translate(-50%, 0);
+    opacity: 1;
   }
   to {
     transform: translate(-50%, -200%);
+    opacity: 0;
   }
 }

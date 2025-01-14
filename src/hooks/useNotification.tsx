@@ -20,7 +20,6 @@ const useNotification = ({
   type = "success",
   text,
   duration = 5000,
-  animationDuration = 1000,
 }: Props) => {
   const [opening, setSituation] = useState(true);
   const [visible, setVisible] = useState(true);
@@ -31,13 +30,13 @@ const useNotification = ({
 
       const removeTimeoutId = setTimeout(() => {
         setVisible(false);
-      }, animationDuration);
+      }, 900);
 
       return () => clearTimeout(removeTimeoutId);
     }, duration);
 
     return () => clearTimeout(timeoutId);
-  }, [duration, animationDuration]);
+  }, [duration]);
 
   const notificationColor = colors[type];
 
