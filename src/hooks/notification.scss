@@ -13,11 +13,10 @@
 
   &-open {
     animation: JumpIn 1000ms ease-in;
-    animation-delay: 500ms;
   }
   &-close {
     animation: JumpOut 1000ms ease-in;
-    display: none;
+    
   }
 }
 
