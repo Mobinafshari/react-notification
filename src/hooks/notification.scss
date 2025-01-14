@@ -9,14 +9,20 @@
   padding: 10px;
   border-radius: 8px;
   border: 1px solid;
-  font-family: cursive;
-
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   &-open {
     animation: JumpIn 1000ms ease-in;
   }
   &-close {
     animation: JumpOut 1000ms ease-in;
-    
+  }
+  &-text{
+    display: flex;
+    align-items: center;
+    gap: 4px;
   }
 }
 

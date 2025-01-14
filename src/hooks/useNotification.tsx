@@ -1,6 +1,13 @@
 import { useCallback, useEffect, useState } from "react";
 import "./notification.scss";
 import { colord } from "colord";
+import { ImCross } from "react-icons/im";
+import {
+  AiOutlineCheckCircle,
+  AiOutlineCloseCircle,
+  AiOutlineInfoCircle,
+  AiOutlineWarning,
+} from "react-icons/ai";
 
 type Props = {
   text: string;
@@ -13,7 +20,13 @@ const colors = {
   warn: "#FEEC37",
   success: "#C2FFC7",
   error: "#FF748B",
-  info: "white",
+  info: "#C4D9FF",
+};
+const icons = {
+  success: <AiOutlineCheckCircle />,
+  info: <AiOutlineInfoCircle />,
+  warn: <AiOutlineWarning />,
+  error: <AiOutlineCloseCircle />,
 };
 
 const useNotification = ({
@@ -23,7 +36,7 @@ const useNotification = ({
 }: Props) => {
   const [opening, setSituation] = useState(true);
   const [visible, setVisible] = useState(true);
-
+  const [toastDuration, setToastDuration] = useState(duration);
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setSituation(false);
@@ -33,10 +46,10 @@ const useNotification = ({
       }, 900);
 
       return () => clearTimeout(removeTimeoutId);
-    }, duration);
+    }, toastDuration);
 
     return () => clearTimeout(timeoutId);
-  }, [duration]);
+  }, [toastDuration]);
 
   const notificationColor = colors[type];
 
@@ -51,10 +64,18 @@ const useNotification = ({
             backgroundColor: notificationColor,
             borderColor: colord(notificationColor).darken(0.3).toHex(),
           }}>
-          {text}
+          <div className="notification-text">
+            {icons[type]}
+            {text}
+          </div>
+          <ImCross
+            onClick={() => setToastDuration(0)}
+            fill="currentColor"
+            style={{ width: "12px", height: "12px", cursor: "pointer" }}
+          />
         </section>
       ),
-    [opening, visible, notificationColor, text]
+    [opening, visible, notificationColor, text, type]
   );
 
   return Toast;
