@@ -1,24 +1,39 @@
 .notification {
-  width: 200px;
+  min-width: 200px;
+  max-width: 400px;
   height: auto;
   position: absolute;
   left: 50%;
-  transform: translate(-50%, 0); 
+  transform: translate(-50%, 0);
   top: 30px;
   padding: 10px;
   border-radius: 8px;
   border: 1px solid;
   font-family: cursive;
-  animation: JumpIn 1000ms ease-in;
-  
-  animation-delay: 500ms;
+
+  &-open {
+    animation: JumpIn 1000ms ease-in;
+    animation-delay: 500ms;
+  }
+  &-close {
+    animation: JumpOut 1000ms ease-in;
+    display: none;
+  }
 }
 
 @keyframes JumpIn {
   from {
-    transform: translate(-50%, -200%); /* Start with translateX and translateY */
+    transform: translate(-50%, -200%);
   }
   to {
-    transform: translate(-50%, 0); /* End with translateX and translateY */
+    transform: translate(-50%, 0);
+  }
+}
+@keyframes JumpOut {
+  from {
+    transform: translate(-50%, 0);
+  }
+  to {
+    transform: translate(-50%, -200%);
   }
 }

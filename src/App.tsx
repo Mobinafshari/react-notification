@@ -1,10 +1,12 @@
-import Notification from "./hooks/Notification"
+import useNotification from "./hooks/useNotification";
 
 function App() {
-  
+  const Toast = useNotification({ text: "Adding user success." });
   return (
-    <div><Notification text="hello"  type="warn"/> </div>
-  )
+    <div>
+      <Toast /> <button>Show toast</button>
+    </div>
+  );
 }
 
-export default App
+export default App;
