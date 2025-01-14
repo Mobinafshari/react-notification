@@ -1,17 +1,21 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import "./notification.scss";
 import { colord } from "colord";
-import { ImCross } from "react-icons/im";
 import {
   AiOutlineCheckCircle,
+  AiOutlineClose,
   AiOutlineCloseCircle,
   AiOutlineInfoCircle,
   AiOutlineWarning,
 } from "react-icons/ai";
 
-type Props = {
+type ToastProps = {
+  id: number;
   text: string;
   type?: "warn" | "error" | "success" | "info";
+};
+
+type HookProps = {
   duration?: number;
   animationDuration?: number;
 };
@@ -22,6 +26,7 @@ const colors = {
   error: "#FF748B",
   info: "#C4D9FF",
 };
+
 const icons = {
   success: <AiOutlineCheckCircle />,
   info: <AiOutlineInfoCircle />,
@@ -30,55 +35,57 @@ const icons = {
 };
 
 const useNotification = ({
-  type = "success",
-  text,
   duration = 5000,
-}: Props) => {
-  const [opening, setSituation] = useState(true);
-  const [visible, setVisible] = useState(true);
-  const [toastDuration, setToastDuration] = useState(duration);
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      setSituation(false);
+  animationDuration = 900,
+}: HookProps) => {
+  const [toasts, setToasts] = useState<ToastProps[]>([]);
 
-      const removeTimeoutId = setTimeout(() => {
-        setVisible(false);
-      }, 900);
+  // Trigger a new toast
+  const trigger = useCallback(
+    (text: string, type: ToastProps["type"] = "success") => {
+      const id = Date.now();
+      setToasts((prev) => [...prev, { id, text, type }]);
 
-      return () => clearTimeout(removeTimeoutId);
-    }, toastDuration);
-
-    return () => clearTimeout(timeoutId);
-  }, [toastDuration]);
-
-  const notificationColor = colors[type];
-
-  const Toast = useCallback(
-    () =>
-      visible && (
-        <section
-          className={`notification ${
-            opening ? "notification-open" : "notification-close"
-          }`}
-          style={{
-            backgroundColor: notificationColor,
-            borderColor: colord(notificationColor).darken(0.3).toHex(),
-          }}>
-          <div className="notification-text">
-            {icons[type]}
-            {text}
-          </div>
-          <ImCross
-            onClick={() => setToastDuration(0)}
-            fill="currentColor"
-            style={{ width: "12px", height: "12px", cursor: "pointer" }}
-          />
-        </section>
-      ),
-    [opening, visible, notificationColor, text, type]
+      setTimeout(() => {
+        setToasts((prev) => prev.filter((toast) => toast.id !== id));
+      }, duration + animationDuration);
+    },
+    [duration, animationDuration]
   );
 
-  return Toast;
+  const Toasts = useCallback(
+    () => (
+      <div className="toast-container">
+        {toasts.map(({ id, text, type ="success" }) => {
+          const notificationColor = colors[type];
+          return (
+            <section
+              key={id}
+              className="notification notification-open"
+              style={{
+                backgroundColor: notificationColor,
+                borderColor: colord(notificationColor).darken(0.1).toHex(),
+              }}>
+              <div className="notification-text">
+                {icons[type]}
+                {text}
+              </div>
+              <AiOutlineClose
+                onClick={() =>
+                  setToasts((prev) => prev.filter((toast) => toast.id !== id))
+                }
+                fill="currentColor"
+                style={{ cursor: "pointer" }}
+              />
+            </section>
+          );
+        })}
+      </div>
+    ),
+    [toasts]
+  );
+
+  return { trigger, Toasts };
 };
 
 export default useNotification;

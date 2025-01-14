@@ -1,13 +1,14 @@
 import useNotification from "./hooks/useNotification";
 
 function App() {
-  const Toast = useNotification({
-    text: "Adding user success.",
-    type: "success",
-  });
+  const {Toasts , trigger} = useNotification({});
   return (
-    <div style={{ color: "white" }}>
-      <Toast /> <button>Show toast</button>
+    <div style={{ color: "black" }}>
+      <Toasts /> 
+      <button onClick={() => trigger("hello", "success")}>Show toast</button>
+      {/* <button onClick={triggerToast}>Show toast</button> */}
+      {/* <button onClick={triggerToast}>Show toast</button> */}
+
     </div>
   );
 }
