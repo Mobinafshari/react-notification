@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import "./notification.scss";
 import { colord } from "colord";
 import {
@@ -35,12 +35,10 @@ const icons = {
 };
 
 const useNotification = ({
-  duration = 5000,
-  animationDuration = 900,
+  duration = 4000,
 }: HookProps) => {
   const [toasts, setToasts] = useState<ToastProps[]>([]);
 
-  // Trigger a new toast
   const trigger = useCallback(
     (text: string, type: ToastProps["type"] = "success") => {
       const id = Date.now();
@@ -48,15 +46,17 @@ const useNotification = ({
 
       setTimeout(() => {
         setToasts((prev) => prev.filter((toast) => toast.id !== id));
-      }, duration + animationDuration);
+      }, duration + 900);
     },
-    [duration, animationDuration]
+    [duration]
   );
 
-  const Toasts = useCallback(
-    () => (
+  const Toasts = useMemo(() => {
+    if (toasts.length === 0) return null;
+
+    return (
       <div className="toast-container">
-        {toasts.map(({ id, text, type ="success" }) => {
+        {toasts.map(({ id, text, type = "success" }) => {
           const notificationColor = colors[type];
           return (
             <section
@@ -81,9 +81,8 @@ const useNotification = ({
           );
         })}
       </div>
-    ),
-    [toasts]
-  );
+    );
+  }, [toasts]);
 
   return { trigger, Toasts };
 };
