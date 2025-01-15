@@ -6,10 +6,13 @@
   flex-direction: column-reverse;
   gap: 10px;
   z-index: 1000;
-  transition: all 1000ms;
 }
 
 .notification {
+  position: fixed;
+  right: 20px;
+  z-index: 1000;
+
   min-width: 200px;
   max-width: 350px;
   padding: 10px;
@@ -22,21 +25,18 @@
   justify-content: space-between;
   gap: 10px;
   opacity: 1;
-  animation: JumpIn 1000ms ease-in;
+  animation: JumpIn 600ms ease-in;
   &-open {
     opacity: 1;
+    animation: clear 600ms ease-in;
   }
-  &-text{
+  &-text {
     display: flex;
     align-items: center;
     gap: 4px;
   }
 }
 
-.notification.notification-close {
-  opacity: 0;
-  transform: translateY(-20px);
-}
 
 @keyframes JumpIn {
   from {

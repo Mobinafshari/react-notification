@@ -34,9 +34,7 @@ const icons = {
   error: <AiOutlineCloseCircle />,
 };
 
-const useNotification = ({
-  duration = 4000,
-}: HookProps) => {
+const useNotification = ({ duration = 4000 }: HookProps) => {
   const [toasts, setToasts] = useState<ToastProps[]>([]);
 
   const trigger = useCallback(
@@ -46,7 +44,7 @@ const useNotification = ({
 
       setTimeout(() => {
         setToasts((prev) => prev.filter((toast) => toast.id !== id));
-      }, duration + 900);
+      }, duration + 500);
     },
     [duration]
   );
@@ -55,14 +53,15 @@ const useNotification = ({
     if (toasts.length === 0) return null;
 
     return (
-      <div className="toast-container">
-        {toasts.map(({ id, text, type = "success" }) => {
+      <>
+        {toasts.map(({ id, text, type = "success" }, index) => {
           const notificationColor = colors[type];
           return (
             <section
               key={id}
               className="notification notification-open"
               style={{
+                top: 20 + (index) * 50,
                 backgroundColor: notificationColor,
                 borderColor: colord(notificationColor).darken(0.1).toHex(),
               }}>
@@ -80,7 +79,7 @@ const useNotification = ({
             </section>
           );
         })}
-      </div>
+      </>
     );
   }, [toasts]);
 
