@@ -54,6 +54,7 @@ const useNotification = (duration: number = 3000) => {
           const notificationColor = colors[type];
           return (
             <section
+            role="alert"
               key={id}
               className="notification notification-open"
               style={{

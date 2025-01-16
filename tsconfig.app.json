@@ -21,9 +21,11 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
+    "types": ["vitest/globals"]
   },
   "include": [
     "src",
-    "src/**/*.d.ts" 
+    "src/**/*.d.ts" ,
+    "test"
   ]
 }
