@@ -15,10 +15,6 @@ type ToastProps = {
   type?: "warn" | "error" | "success" | "info";
 };
 
-type HookProps = {
-  duration?: number;
-  animationDuration?: number;
-};
 
 const colors = {
   warn: "#FEEC37",
@@ -34,7 +30,7 @@ const icons = {
   error: <AiOutlineCloseCircle />,
 };
 
-const useNotification = ({ duration = 4000 }: HookProps) => {
+const useNotification = (duration: number = 3000) => {
   const [toasts, setToasts] = useState<ToastProps[]>([]);
 
   const trigger = useCallback(
@@ -61,7 +57,7 @@ const useNotification = ({ duration = 4000 }: HookProps) => {
               key={id}
               className="notification notification-open"
               style={{
-                top: 20 + (index) * 50,
+                top: 20 + index * 50,
                 backgroundColor: notificationColor,
                 borderColor: colord(notificationColor).darken(0.1).toHex(),
               }}>
