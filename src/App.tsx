@@ -1,9 +1,16 @@
-import useNotification from "./hooks/useNotification";
-
+import useNotification from "react-notification-npm"
 function App() {
-  const {Toasts , trigger} = useNotification();
+  const { Toasts, trigger } = useNotification();
   return (
-    <div style={{ color: "black"  , display : "flex" , flexDirection : "column" , gap : "10px" , width : "100px" , justifyContent : "center"}}>
+    <div
+      style={{
+        color: "black",
+        display: "flex",
+        flexDirection: "column",
+        gap: "10px",
+        width: "100px",
+        justifyContent: "center",
+      }}>
       {Toasts}
       <button onClick={() => trigger("hello", "success")}>Show toast</button>
       {/* <button onClick={() => trigger("hello", "warn")}>Show toast</button> */}
