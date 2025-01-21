@@ -1,6 +1,6 @@
-import useNotification from "react-notification-npm"
+import Button from "react-notification-npm"
 function App() {
-  const { Toasts, trigger } = useNotification();
+  // const { Toasts, trigger } = useNotification();
   return (
     <div
       style={{
@@ -11,8 +11,9 @@ function App() {
         width: "100px",
         justifyContent: "center",
       }}>
-      {Toasts}
-      <button onClick={() => trigger("hello", "success")}>Show toast</button>
+      {/* {Toasts} */}
+      <Button>hey</Button>
+      <button >Show toast</button>
       {/* <button onClick={() => trigger("hello", "warn")}>Show toast</button> */}
       {/* <button onClick={() => trigger("hello", "error")}>Show toast</button> */}
       {/* <button onClick={() => trigger("hello", "info")}>Show toast</button> */}
