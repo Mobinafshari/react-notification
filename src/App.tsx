@@ -1,7 +1,7 @@
 import useNotification from "react-notification-npm";
 
 function App() {
-  const { Toasts, trigger } = useNotification();
+  const { Toasts, trigger } = useNotification(10000);
   return (
     <div
       style={{
@@ -13,7 +13,7 @@ function App() {
         justifyContent: "center",
       }}>
       {Toasts}
-      <button onClick={() => trigger("hello")}>Show toast</button>
+      <button onClick={() => trigger("hello" , "error")}>Show toast</button>
       {/* <button onClick={() => trigger("hello", "warn")}>Show toast</button> */}
       {/* <button onClick={() => trigger("hello", "error")}>Show toast</button> */}
       {/* <button onClick={() => trigger("hello", "info")}>Show toast</button> */}
